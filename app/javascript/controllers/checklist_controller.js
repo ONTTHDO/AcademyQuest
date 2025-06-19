@@ -6,7 +6,7 @@ export default class extends Controller {
     const questId = checkbox.dataset.questId;
     const label = this.findLabel(checkbox);
 
-    this.toggleStrikeThrough(label, checkbox.checked);
+    this.updateLabelStyle(label, checkbox.checked);
 
     fetch(`/quests/${questId}`, {
       method: "PATCH",
@@ -24,7 +24,7 @@ export default class extends Controller {
       .catch(() => {
         alert("Failed to update quest status");
         checkbox.checked = !checkbox.checked;
-        this.toggleStrikeThrough(label, checkbox.checked);
+        this.updateLabelStyle(label, checkbox.checked);
       });
   }
 
