@@ -315,6 +315,10 @@ GEM
     reline (0.6.1)
       io-console (~> 0.5)
     rexml (3.4.1)
+    rspec (3.13.1)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
     rspec-core (3.13.4)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
@@ -477,6 +481,7 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 8.0.2)
   rails-controller-testing
+  rspec (~> 3.13)
   rspec-rails (~> 8.0.0)
   rubocop-rails-omakase
   selenium-webdriver
