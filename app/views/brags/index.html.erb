@@ -1,0 +1,32 @@
+<div class="min-h-screen w-screen">
+   <div class="w-screen flex items-center justify-center z-10">
+    <div class="w-full max-w-4xl mx-auto p-6 mt-4">
+      <div class="bg-white rounded-2xl shadow-sm mb-8 p-6">
+        <div class="text-2xl font-bold text-gray-900 mb-3 text-center">My Brag Document 2025</div>
+        <div class="h-1 w-32 bg-blue-500 mx-auto mb-6 rounded-full"></div>
+
+        <ul class="space-y-4">
+          <% [
+            { text: 'กล้าพูดมากขึ้น พยายามสื่อสารให้คนเข้าใจง่ายขึ้น' },
+            { text: 'เขียนโปรเจค React ได้โดยไม่ต้องเปิดเอกสาร' },
+            { text: 'เลื่อนระดับใน Codewars เป็น kata 6' },
+            { text: 'พยายามฝึกทำ TDD ให้เป็นนิสัย' },
+          ].each do |item| %>
+            <li class="bg-white rounded-xl shadow-sm p-4">
+              <div class="text-gray-700"><%= item[:text] %></div>
+            </li>
+          <% end %>
+        </ul>
+
+        <div class="text-center mt-8">
+          <%= link_to "< Back", quests_path, 
+              class: "inline-block px-6 py-2 bg-blue-100 text-blue-600 font-medium text-sm border border-blue-200 rounded-full hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors",
+              data: { 
+                  testid: "back-button"
+              }
+          %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
