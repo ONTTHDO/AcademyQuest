@@ -27,8 +27,14 @@
         <% @quests.each do |quest| %>
           <li class="flex items-center justify-between gap-2 my-2 p-4 bg-white rounded-xl shadow-sm" data-testid="quest-item-<%= quest.id %>">
             <div class="flex items-center gap-3">
-              <%= check_box_tag "done", "1", quest.done, data: { checklist_target: "checkbox", action: "change->checklist#toggle", testid: "quest-done-#{quest.id}" }, class: "w-5 h-5 text-blue-600 rounded" %>
-              <label data-checklist-target="label" data-testid="quest-title-<%= quest.id %>" class="<%= 'line-through text-gray-400' if quest.done %> font-medium">
+              <%= check_box_tag "done", "1", quest.done, data: { 
+                checklist_target: "checkbox", 
+                action: "change->checklist#toggle", 
+                testid: "quest-done-#{quest.id}",
+                quest_id: quest.id
+                }, 
+                class: "w-5 h-5 text-blue-600 rounded" %>
+              <label data-checklist-target="label" data-testid="quest-title-<%= quest.id %>" class="<%= 'line-through' if quest.done %> font-medium">
                 <%= quest.title %>
               </label>
             </div>
