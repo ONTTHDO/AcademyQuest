@@ -1,34 +1,43 @@
 <% content_for :title, "Quests" %>
 
-<div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
-  <% end %>
-
-  <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Quests</h1>
-    <%= form_with model: Quest.new, local: true do |form| %>
-      <div class="flex gap-2 mt-4">
-        <%= form.text_field :title, placeholder: "New quest", class: "border p-2 flex-1 block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
-        <%= form.submit "Add", class: "rounded-md px-3.5 py-2.5 bg-blue-500 hover:bg-blue-500 text-white block font-medium" %>
-      </div>
-    <% end %>
+<div class="w-full max-w-4xl mx-auto p-6 mt-10">
+  <div class="bg-white rounded-2xl shadow-sm mb-8 p-6">
+    <%= image_tag "my_profile.jpg", class: "w-24 h-24 rounded-full object-cover mx-auto", data: { testid: "profile-picture" } %>
+    <div class="text-2xl font-bold text-gray-900 mb-3 text-center" data-testid="profile-name">
+      Natthida Rungrueang
+    </div>
+    <div class="text-center text-gray-500 mb-6" data-testid="profile-title">
+      Software Developer
+    </div> 
+    <div class="text-center mb-6">
+      <%= link_to "View Brag Document", brag_path, class: "underline text-blue-600", data: { testid: "brag-link" } %>
+    </div>
   </div>
+
+  <%= form_with model: Quest.new, local: true do |form| %>
+    <div class="flex gap-2 mb-6">
+      <%= form.text_field :title, placeholder: "New quest", class: "border p-2 flex-1 block shadow-sm rounded-md px-3 py-2" %>
+      <%= form.submit "Add", class: "rounded-md px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-medium" %>
+    </div>
+  <% end %>
 
   <div id="quests" class="min-w-full divide-y divide-gray-200 space-y-5">
     <% if @quests.any? %>
-      <% @quests.each do |quest| %>
-        <div class="flex flex-col sm:flex-row justify-between items-center pb-5 sm:pb-0">
-          <%= render quest %>
-          <div class="w-full sm:w-auto flex flex-col sm:flex-row space-x-2 space-y-2">
-            <%= link_to "Show", quest, class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= link_to "Edit", edit_quest_path(quest), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-            <%= button_to "Destroy", quest, method: :delete, class: "w-full sm:w-auto rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      <% end %>
+      <ul data-controller="checklist" class="mt-4" data-testid="quest-list">
+        <% @quests.each do |quest| %>
+          <li class="flex items-center justify-between gap-2 my-2 p-4 bg-white rounded-xl shadow-sm" data-testid="quest-item-<%= quest.id %>">
+            <div class="flex items-center gap-3">
+              <%= check_box_tag "done", "1", quest.done, data: { checklist_target: "checkbox", action: "change->checklist#toggle", testid: "quest-done-#{quest.id}" }, class: "w-5 h-5 text-blue-600 rounded" %>
+              <label data-checklist-target="label" data-testid="quest-title-<%= quest.id %>" class="<%= 'line-through text-gray-400' if quest.done %> font-medium">
+                <%= quest.title %>
+              </label>
+            </div>
+            <%= button_to "❌", quest, method: :delete, data: { testid: "quest-delete-#{quest.id}" }, class: "text-red-600 hover:text-red-800 font-bold text-xl p-1 b " %>
+          </li>
+        <% end %>
+      </ul>
     <% else %>
-      <p class="text-center my-10">No quests found.</p>
+      <div class="text-center my-10 text-gray-500 font-medium">No quests found.</div>
     <% end %>
   </div>
 </div>
