@@ -38,8 +38,8 @@ class QuestsController < ApplicationController
   def update
     respond_to do |format|
       if @quest.update(quest_params)
-        format.html { redirect_to @quest, notice: "Quest was successfully updated." }
-        format.json { render :show, status: :ok, location: @quest }
+        format.html { redirect_to quests_path, notice: "Quest was successfully updated." }
+        format.json { render json: @quest }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @quest.errors, status: :unprocessable_entity }
@@ -60,11 +60,11 @@ class QuestsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_quest
-      @quest = Quest.find(params.expect(:id))
+      @quest = Quest.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def quest_params
-      params.expect(quest: [ :title, :done ])
+      params.require(:quest).permit(:title, :done)
     end
 end
