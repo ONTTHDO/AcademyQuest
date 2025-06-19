@@ -18,10 +18,6 @@ Given("a quest titled {string} exists") do |title|
   create(:quest, title: title)
 end
 
-When("I visit the home page") do
-  visit root_path
-end
-
 When("I click the done button for {string}") do |title|
   quest = Quest.find_by(title: title)
   selector = "[data-testid='quest-done-#{quest.id}']"

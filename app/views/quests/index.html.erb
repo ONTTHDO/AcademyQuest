@@ -22,10 +22,10 @@
   <% end %>
 
   <div id="quests" class="min-w-full divide-y divide-gray-200 space-y-5">
-    <% if @quests.any? %>
-      <ul data-controller="checklist" class="mt-4" data-testid="quest-list">
+    <ul data-controller="checklist" class="mt-4" data-testid="quest-list">
+      <% if @quests.any? %>
         <% @quests.each do |quest| %>
-          <li class="quest flex items-center justify-between gap-2 my-2 p-4 bg-white rounded-xl shadow-sm <%= 'done' if quest.done %>" data-testid="quest-item-<%= quest.id %>">
+          <li id="quest-item-<%= quest.id %>" class="quest flex items-center justify-between gap-2 my-2 p-4 bg-white rounded-xl shadow-sm <%= 'done' if quest.done %>" data-testid="quest-item-<%= quest.id %>">
             <div class="flex items-center gap-3">
               <%= check_box_tag "done", "1", quest.done, data: { 
                 checklist_target: "checkbox", 
@@ -41,9 +41,9 @@
             <%= button_to "❌", quest, method: :delete, data: { testid: "quest-delete-#{quest.id}" }, class: "text-red-600 hover:text-red-800 font-bold text-xl p-1 b " %>
           </li>
         <% end %>
-      </ul>
-    <% else %>
-      <div class="text-center my-10 text-gray-500 font-medium">No quests found.</div>
-    <% end %>
+      <% else %>
+        <li class="text-center text-gray-500 font-medium">No quests found.</li>
+      <% end %>
+    </ul>
   </div>
 </div>
