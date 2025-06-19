@@ -7,7 +7,12 @@
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Quests</h1>
-    <%= link_to "New quest", new_quest_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+    <%= form_with model: Quest.new, local: true do |form| %>
+      <div class="flex gap-2 mt-4">
+        <%= form.text_field :title, placeholder: "New quest", class: "border p-2 flex-1 block shadow-sm rounded-md border px-3 py-2 mt-2 w-full" %>
+        <%= form.submit "Add", class: "rounded-md px-3.5 py-2.5 bg-blue-500 hover:bg-blue-500 text-white block font-medium" %>
+      </div>
+    <% end %>
   </div>
 
   <div id="quests" class="min-w-full divide-y divide-gray-200 space-y-5">
