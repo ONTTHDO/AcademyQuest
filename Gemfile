@@ -47,7 +47,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
-  gem "rspec-rails", "~> 8.0.0"
+  gem "rspec-rails", "~> 8.0.1"
   gem "dotenv-rails"
   gem "brakeman", require: false
 
