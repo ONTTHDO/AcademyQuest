@@ -80,7 +80,7 @@ jobs:
       DB_PORT: ${{ secrets.DB_PORT }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
